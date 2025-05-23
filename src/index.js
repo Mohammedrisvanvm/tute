@@ -31,14 +31,14 @@ app.use(
 app.use(
   (req,
   res,
-  (next) => {
+  next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept"
     );
     next();
-  })
+  }
 );
 
 app.use(express.json());
@@ -51,7 +51,9 @@ app.get("/", (req, res) => {
 
 app.post("/upload", upload.single("file"), (req, res) => {
   console.log(req.file);
-  console.log("file uploaded");
+  res.json({
+    filePath: req.file.path,
+  });
 });
 
 app.listen(PORT, () => {
