@@ -2,8 +2,16 @@ import express from "express";
 
 const app = express();
 
+const PORT = process.env.PORT || 8000;
 
-const PORT = process.env.PORT || 3000;
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    Credentials: true,
+  })
+);
+
+
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
