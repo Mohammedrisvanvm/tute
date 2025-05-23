@@ -50,10 +50,12 @@ app.get("/", (req, res) => {
 });
 
 app.post("/upload", upload.single("file"), (req, res) => {
-  console.log(req.file);
-  res.json({
-    filePath: req.file.path,
-  });
+const generateId= uuidV4();
+  const videoPath = req.file.path;
+  const outputPath = `uploads/courses/${generateId}.mp4`;
+  const hlspath= `${outputPath}/index.m3u8`;
+  console.log(videoPath,"hls path",hlspath);
+
 });
 
 app.listen(PORT, () => {
